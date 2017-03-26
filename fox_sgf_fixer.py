@@ -1,8 +1,6 @@
-import os, re
+import os, sys
 import gofish
 
-IN_DIR = "foo"
-OUT_DIR = "bar"
 
 KNOWN_PLAYERS = {
 	"绝艺":			"Fine Art",
@@ -19,35 +17,63 @@ KNOWN_PLAYERS = {
 	"nparadigm":	"Shin Jinseo",
 }
 
-def list_map(arr, func):
-	return list(map(func, arr))
 
-def list_filter(arr, func):
-	return list(filter(func, arr))
+def deal_with_file(filename):
+	try:
+		os.chdir(os.path.dirname(filename))
 
-all_things = list_map(os.listdir(IN_DIR), lambda x : os.path.join(IN_DIR, x))
-all_files = list_filter(all_things, lambda x : os.path.isfile(x))
+		root = gofish.load(filename)
 
-for filename in all_files:
+		root.safe_commit("CA", "utf-8")
+		root.safe_commit("KM", 6.5)			# FIXME
 
-    root = gofish.load(filename)
+		for key in ["GN", "TT", "TM", "TC", "AP"]:
+			root.delete_property(key)
 
-    root.safe_commit("CA", "utf-8")
-    root.safe_commit("KM", 6.5)			# FIXME
+		if "HA" in root.properties:
+			if root.properties["HA"] == ["0"]:
+				root.delete_property("HA")
 
-    for key in ["GN", "TT", "TM", "TC", "AP"]:
-        root.delete_property(key)
+		for key in ["PW", "PB"]:
+			orig = root.properties[key][0]
+			if orig in KNOWN_PLAYERS:
+				root.properties[key][0] = "{} ({})".format(orig, KNOWN_PLAYERS[orig])
 
-    if "HA" in root.properties:
-    	if root.properties["HA"] == ["0"]:
-    		root.delete_property("HA")
+		rp = root.properties
 
-    for key in ["PW", "PB"]:
-    	orig = root.properties[key][0]
-    	if orig in KNOWN_PLAYERS:
-    		root.properties[key][0] = "{} ({})".format(orig, KNOWN_PLAYERS[orig])
+		newfilename = "{} {} vs {} ({}).sgf".format(rp["DT"][0], rp["PB"][0], rp["PW"][0], root.dyer().replace("?", "_"))
 
-    black, white, date, gid = re.search(r"\[(.+)\]vs\[(.+)\](\d\d\d\d\d\d\d\d)(\d\d\d\d\d\d\d\d).sgf", filename).group(1, 2, 3, 4)
-    newfilename = os.path.join(OUT_DIR, "{} {} vs {} ({}).sgf".format(date, black, white, gid))
+		gofish.save_file(newfilename, root)
 
-    gofish.save_file(newfilename, root)
+	except Exception as err:
+		try:
+			print(err)
+		except:
+			print("<unprintable exception>")
+
+
+def deal_with_files(filenames):
+	for filename in filenames:
+		deal_with_file(filename)
+
+
+def main():
+
+	if len(sys.argv) == 1:
+		print("Need argument")
+		sys.exit()
+
+	for item in sys.argv[1:]:
+
+		item = os.path.abspath(item)
+
+		if os.path.isdir(item):
+			all_things = list(map(lambda x : os.path.join(item, x), os.listdir(item)))
+			all_files = list(filter(lambda x : os.path.isfile(x), all_things))
+			deal_with_files(all_files)
+		else:
+			deal_with_file(item)
+
+
+if __name__ == "__main__":
+	main()
