@@ -39,7 +39,7 @@ for filename in all_files:
         root.delete_property(key)
 
     if "HA" in root.properties:
-    	if root.properties["HA"] == "0":
+    	if root.properties["HA"] == ["0"]:
     		root.delete_property("HA")
 
     for key in ["PW", "PB"]:
