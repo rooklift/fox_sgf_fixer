@@ -24,8 +24,10 @@ def deal_with_file(filename):
 
 		root = gofish.load(filename)
 
-		root.safe_commit("CA", "utf-8")
-		root.safe_commit("KM", 6.5)			# FIXME
+		root.set_value("CA", "UTF-8")
+
+		if root.properties["KM"] == ["0"]:			# Usually bogus
+			root.set_value("KM", 6.5)
 
 		for key in ["GN", "TT", "TM", "TC", "AP"]:
 			root.delete_property(key)
