@@ -52,11 +52,11 @@ def deal_with_file(filename):
 			root.delete_property(key)
 
 		if "HA" in root.properties:
-			if root.properties["HA"] == ["0"]:
+			if root.get_value("HA") == "0":
 				root.delete_property("HA")
 
-		black_for_filename = root.properties["PB"][0]
-		white_for_filename = root.properties["PW"][0]
+		black_for_filename = root.get_value("PB")
+		white_for_filename = root.get_value("PW")
 
 		try:
 			black, white, = re.search(r"\[(.+)\]vs\[(.+)\]\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\.sgf", filename).group(1, 2)
