@@ -1,4 +1,4 @@
-import os, sys
+import os, re, sys
 import gofish
 
 
@@ -36,14 +36,20 @@ def deal_with_file(filename):
 			if root.properties["HA"] == ["0"]:
 				root.delete_property("HA")
 
-		for key in ["PW", "PB"]:
-			orig = root.properties[key][0]
-			if orig in KNOWN_PLAYERS:
-				root.properties[key][0] = "{} ({})".format(orig, KNOWN_PLAYERS[orig])
+		try:
+			black, white, = re.search(r"\[(.+)\]vs\[(.+)\]\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\.sgf", filename).group(1, 2)
+			if black in KNOWN_PLAYERS:
+				root.safe_commit("PB", KNOWN_PLAYERS[black])
+			if white in KNOWN_PLAYERS:
+				root.safe_commit("PW", KNOWN_PLAYERS[white])
+		except:
+			pass
 
 		rp = root.properties
 
-		newfilename = "{} {} vs {} ({}).sgf".format(rp["DT"][0], rp["PB"][0], rp["PW"][0], root.dyer().replace("?", "_"))
+		newfilename = "{} {} vs {}.sgf".format(rp["DT"][0], rp["PB"][0], rp["PW"][0])
+		if os.path.exists(newfilename):
+			newfilename = "{} {} vs {} ({}).sgf".format(rp["DT"][0], rp["PB"][0], rp["PW"][0], root.dyer().replace("?", "_"))
 
 		gofish.save(newfilename, root)
 
