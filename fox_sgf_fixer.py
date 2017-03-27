@@ -45,7 +45,7 @@ def deal_with_file(filename):
 
 		newfilename = "{} {} vs {} ({}).sgf".format(rp["DT"][0], rp["PB"][0], rp["PW"][0], root.dyer().replace("?", "_"))
 
-		gofish.save_file(newfilename, root)
+		gofish.save(newfilename, root)
 
 	except Exception as err:
 		try:
