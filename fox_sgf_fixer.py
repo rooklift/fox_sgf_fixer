@@ -45,11 +45,12 @@ def deal_with_file(filename):
 
 		root.set_value("CA", "UTF-8")
 
-		if root.properties["KM"] == ["0"]:			# Usually bogus
-			root.set_value("KM", 6.5)
-
 		for key in ["GN", "TT", "TM", "TC", "AP"]:
 			root.delete_property(key)
+
+		if "KM" in root.properties:
+			if root.properties["KM"] == ["0"]:			# Usually bogus
+				root.delete_property("KM")
 
 		if "HA" in root.properties:
 			if root.get_value("HA") == "0":
