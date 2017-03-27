@@ -48,13 +48,11 @@ def deal_with_file(filename):
 		for key in ["GN", "TT", "TM", "TC", "AP"]:
 			root.delete_property(key)
 
-		if "KM" in root.properties:
-			if root.properties["KM"] == ["0"]:			# Usually bogus
-				root.delete_property("KM")
+		if root.get_value("KM") == "0":			# Usually bogus
+			root.delete_property("KM")
 
-		if "HA" in root.properties:
-			if root.get_value("HA") == "0":
-				root.delete_property("HA")
+		if root.get_value("HA") == "0":
+			root.delete_property("HA")
 
 		black_for_filename = root.get_value("PB")
 		white_for_filename = root.get_value("PW")
