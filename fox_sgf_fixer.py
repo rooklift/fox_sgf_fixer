@@ -3,19 +3,30 @@ import gofish
 
 
 KNOWN_PLAYERS = {
+
+	# Not 100% guaranteed accurate...
+	# If both a logographic name and an ASCII name
+	# are known, I sometimes have both here...
+
 	"小香馋猫":		"Chang Hao",
 	"谜团":			"Chen Yaoye",
 	"绝艺":			"Fine Art",
 	"星宿老仙":		"Gu Li",
+	"印城之霸":		"Gu Zihao",
+	"孔明":			"Huang Yusong",
+	"若水云寒":		"Jiang Weijie",
 	"潜伏":			"Ke Jie",
 	"剑过无声":		"Lian Xiao",
 	"愿我能":			"Meng Tailing",
+	"顺利过关":		"Mi Yuting",
 	"聂卫平":			"Nie Weiping",
 	"段誉":			"Tan Xiao",
+	"诸神的荣耀":		"Tang Weixing",
 	"天选":			"Tuo Jiaxi",
 	"周俊勳":			"Zhou Junxun",
 
 	"airforce9":	"Kim Jiseok",
+	"bibibig":		"Choi Cheolhan",
 	"black2012":	"Li Qinchong",
 	"Eason":		"Zhou Ruiyang",
 	"INDIANA13":	"Gu Zihao",
@@ -26,12 +37,14 @@ KNOWN_PLAYERS = {
 	"leaf":			"Shi Yue",
 	"maker":		"Park Junghwan",
 	"Master":		"AlphaGo",
+	"miracle97":	"Byun Sangil",
 	"nparadigm":	"Shin Jinseo",
 	"piaojie":		"Kang Dongyun",
 	"pyh":			"Park Yeonghun",
 	"shadowpow":	"Cho Hanseung",
 	"smile":		"Yang Dingxin",
 	"spinmove":		"An Sungjoon",
+	"TMC":			"Mi Yuting",
 	"wonfun":		"Weon Seongjin",
 	"ykpcx":		"Fan Tingyu",
 }
