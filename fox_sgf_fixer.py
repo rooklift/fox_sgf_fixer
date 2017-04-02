@@ -70,6 +70,8 @@ def deal_with_file(filename):
 		black_for_filename = root.get_value("PB")
 		white_for_filename = root.get_value("PW")
 
+		# Replace PB and PW on the basis of filename...
+
 		try:
 			black, white, = re.search(r"\[(.+)\]vs\[(.+)\]\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\.sgf", filename).group(1, 2)
 			if black in KNOWN_PLAYERS:
@@ -80,6 +82,18 @@ def deal_with_file(filename):
 				white_for_filename = KNOWN_PLAYERS[white]
 		except:
 			pass
+
+		# Or replace PB and PW on the basis of PB and PW...
+		# Will only occur if the above failed, since if it
+		# succeeded, PB and PW will no longer match the dict.
+
+		black, white = root.get_value("PB"), root.get_value("PW")
+		if black in KNOWN_PLAYERS:
+			root.safe_commit("PB", "{} ({})".format(black, KNOWN_PLAYERS[black]))
+			black_for_filename = KNOWN_PLAYERS[black]
+		if white in KNOWN_PLAYERS:
+			root.safe_commit("PW", "{} ({})".format(white, KNOWN_PLAYERS[white]))
+			white_for_filename = KNOWN_PLAYERS[white]
 
 		dt = root.properties["DT"][0]
 
