@@ -61,8 +61,8 @@ def deal_with_file(filename):
 		for key in ["GN", "TT", "TM", "TC", "AP"]:
 			root.delete_property(key)
 
-		if root.get_value("KM") == "0":			# Usually bogus
-			root.delete_property("KM")
+		if root.get_value("KM") == "0" and root.get_value("HA") == "0":		# Fox writes HA[1] if komi is really 0.
+			root.set_value("KM", "6.5")
 
 		if root.get_value("HA") == "0":
 			root.delete_property("HA")
