@@ -61,8 +61,17 @@ def deal_with_file(filename):
 		for key in ["GN", "TT", "TM", "TC", "AP"]:
 			root.delete_property(key)
 
-		if root.get_value("KM") == "0" and root.get_value("HA") == "0":		# Fox writes HA[1] if komi is really 0.
+		komi_string = root.get_value("KM")
+
+		if komi_string == "0" and root.get_value("HA") == "0":		# Fox writes HA[1] if komi is really 0.
 			root.set_value("KM", "6.5")
+
+		try:
+			if float(komi_string) >= 10 and "." not in komi_string:
+				new_string = komi_string[0] + "." + komi_string[1:]
+				root.set_value("KM", new_string)
+		except:
+			pass
 
 		if root.get_value("HA") == "0":
 			root.delete_property("HA")
