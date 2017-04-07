@@ -18,7 +18,6 @@ KNOWN_PLAYERS = {
 	"潜伏":			"Ke Jie",
 	"剑过无声":		"Lian Xiao",
 	"愿我能":			"Meng Tailing",
-	"顺利过关":		"Mi Yuting",
 	"聂卫平":			"Nie Weiping",
 	"段誉":			"Tan Xiao",
 	"诸神的荣耀":		"Tang Weixing",
@@ -28,6 +27,7 @@ KNOWN_PLAYERS = {
 	"airforce9":	"Kim Jiseok",
 	"bibibig":		"Choi Cheolhan",
 	"black2012":	"Li Qinchong",
+	"doomsday":		"Mi Yuting",
 	"Eason":		"Zhou Ruiyang",
 	"INDIANA13":	"Gu Zihao",
 	"jingjing":		"Dang Yifei",
@@ -44,7 +44,6 @@ KNOWN_PLAYERS = {
 	"shadowpow":	"Cho Hanseung",
 	"smile":		"Yang Dingxin",
 	"spinmove":		"An Sungjoon",
-	"TMC":			"Mi Yuting",
 	"wonfun":		"Weon Seongjin",
 	"ykpcx":		"Fan Tingyu",
 }
