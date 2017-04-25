@@ -78,38 +78,34 @@ def deal_with_file(filename):
 		if root.get_value("HA") == "0":
 			root.delete_property("HA")
 
-		# Exactly which name we use for filenames is complicated. We could use either PW/PB tags, names
-		# from original filename regex, or KNOWN_PLAYERS lookup from either of those things.
-		# To start with, get the PW/PB tags...
+		# Work out what names we're using for the outfile and the PB/PW tags...
 
-		black_for_filename = root.get_value("PB")
-		white_for_filename = root.get_value("PW")
-
-		# Replace PB and PW on the basis of filename...
-
+		PB, PW = root.get_value("PB"), root.get_value("PW")
+		black_real_name, white_real_name = None, None
+		regex_PB, regex_PW = None, None
 		try:
-			black, white, = re.search(r"\[(.+)\]vs\[(.+)\]\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\.sgf", filename).group(1, 2)
-			black_for_filename, white_for_filename = black, white
-			if black in KNOWN_PLAYERS:
-				root.safe_commit("PB", "{} ({})".format(black, KNOWN_PLAYERS[black]))
-				black_for_filename = KNOWN_PLAYERS[black]
-			if white in KNOWN_PLAYERS:
-				root.safe_commit("PW", "{} ({})".format(white, KNOWN_PLAYERS[white]))
-				white_for_filename = KNOWN_PLAYERS[white]
+			regex_PB, regex_PW = re.search(r"\[(.+)\]vs\[(.+)\]\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\.sgf", filename).group(1, 2)
 		except:
 			pass
 
-		# Or replace PB and PW on the basis of PB and PW...
-		# Will only occur if the above failed, since if it
-		# succeeded, PB and PW will no longer match the dict.
+		if regex_PB in KNOWN_PLAYERS:
+			black_real_name = KNOWN_PLAYERS[regex_PB]
+			root.safe_commit("PB", "{} ({})".format(regex_PB, black_real_name))
+		elif PB in KNOWN_PLAYERS:
+			black_real_name = KNOWN_PLAYERS[PB]
+			root.safe_commit("PB", "{} ({})".format(PB, black_real_name))
 
-		black, white = root.get_value("PB"), root.get_value("PW")
-		if black in KNOWN_PLAYERS:
-			root.safe_commit("PB", "{} ({})".format(black, KNOWN_PLAYERS[black]))
-			black_for_filename = KNOWN_PLAYERS[black]
-		if white in KNOWN_PLAYERS:
-			root.safe_commit("PW", "{} ({})".format(white, KNOWN_PLAYERS[white]))
-			white_for_filename = KNOWN_PLAYERS[white]
+		if regex_PW in KNOWN_PLAYERS:
+			white_real_name = KNOWN_PLAYERS[regex_PW]
+			root.safe_commit("PW", "{} ({})".format(regex_PW, white_real_name))
+		elif PW in KNOWN_PLAYERS:
+			white_real_name = KNOWN_PLAYERS[PW]
+			root.safe_commit("PW", "{} ({})".format(PW, white_real_name))
+
+		black_for_filename = black_real_name if black_real_name else regex_PB if regex_PB else PB
+		white_for_filename = white_real_name if white_real_name else regex_PW if regex_PW else PW
+
+		# (Done)
 
 		dt = root.properties["DT"][0]
 
