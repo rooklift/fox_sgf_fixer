@@ -102,8 +102,8 @@ def deal_with_file(filename):
 			white_real_name = KNOWN_PLAYERS[PW]
 			root.safe_commit("PW", "{} ({})".format(PW, white_real_name))
 
-		black_for_filename = black_real_name if black_real_name else regex_PB if regex_PB else PB
-		white_for_filename = white_real_name if white_real_name else regex_PW if regex_PW else PW
+		black_for_filename = black_real_name if black_real_name else regex_PB if regex_PB else PB if PB else "Unknown"
+		white_for_filename = white_real_name if white_real_name else regex_PW if regex_PW else PW if PW else "Unknown"
 
 		# (Done)
 
