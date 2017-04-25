@@ -107,7 +107,7 @@ def deal_with_file(filename):
 
 		# (Done)
 
-		dt = root.properties["DT"][0]
+		dt = root.get_value("DT")
 
 		newfilename = "{} {} vs {}.sgf".format(dt, black_for_filename, white_for_filename)
 		if os.path.exists(newfilename):
