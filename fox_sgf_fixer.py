@@ -13,6 +13,7 @@ KNOWN_PLAYERS = {
 	"绝艺":			"Fine Art",
 	"星宿老仙":		"Gu Li",
 	"印城之霸":		"Gu Zihao",
+	"风清扬":			"Hu Yaoyu",
 	"孔明":			"Huang Yusong",
 	"若水云寒":		"Jiang Weijie",
 	"潜伏":			"Ke Jie",
@@ -22,11 +23,13 @@ KNOWN_PLAYERS = {
 	"段誉":			"Tan Xiao",
 	"诸神的荣耀":		"Tang Weixing",
 	"天选":			"Tuo Jiaxi",
+	"杨鼎新":			"Yang Dingxin",
 	"周俊勳":			"Zhou Junxun",
 
 	"airforce9":	"Kim Jiseok",
+	"Avenger007":	"Wang Yao",
 	"bibibig":		"Choi Cheolhan",
-	"black2012":	"Li Qinchong",
+	"black2012":	"Li Qincheng",
 	"doomsday":		"Mi Yuting",
 	"Eason":		"Zhou Ruiyang",
 	"INDIANA13":	"Gu Zihao",
@@ -75,6 +78,10 @@ def deal_with_file(filename):
 		if root.get_value("HA") == "0":
 			root.delete_property("HA")
 
+		# Exactly which name we use for filenames is complicated. We could use either PW/PB tags, names
+		# from original filename regex, or KNOWN_PLAYERS lookup from either of those things.
+		# To start with, get the PW/PB tags...
+
 		black_for_filename = root.get_value("PB")
 		white_for_filename = root.get_value("PW")
 
@@ -82,6 +89,7 @@ def deal_with_file(filename):
 
 		try:
 			black, white, = re.search(r"\[(.+)\]vs\[(.+)\]\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\.sgf", filename).group(1, 2)
+			black_for_filename, white_for_filename = black, white
 			if black in KNOWN_PLAYERS:
 				root.safe_commit("PB", "{} ({})".format(black, KNOWN_PLAYERS[black]))
 				black_for_filename = KNOWN_PLAYERS[black]
