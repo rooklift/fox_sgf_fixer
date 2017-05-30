@@ -17,12 +17,15 @@ KNOWN_PLAYERS = {
 	"孔明":			"Huang Yusong",
 	"若水云寒":		"Jiang Weijie",
 	"潜伏":			"Ke Jie",
+	"骊龙":			"L.L. Fine Art",		# "Li Long" - alternate version of Fine Art
 	"剑过无声":		"Lian Xiao",
 	"愿我能":			"Meng Tailing",
 	"聂卫平":			"Nie Weiping",
 	"段誉":			"Tan Xiao",
 	"诸神的荣耀":		"Tang Weixing",
 	"天选":			"Tuo Jiaxi",
+	"道是心常平":		"Wu Guangya",
+	"刑天":			"Xing Tian AI",			# Mystery AI
 	"杨鼎新":			"Yang Dingxin",
 	"周俊勳":			"Zhou Junxun",
 
@@ -45,6 +48,7 @@ KNOWN_PLAYERS = {
 	"piaojie":		"Kang Dongyun",
 	"pyh":			"Park Yeonghun",
 	"shadowpow":	"Cho Hanseung",
+	"singlesong":	"Fan Yin",
 	"smile":		"Yang Dingxin",
 	"spinmove":		"An Sungjoon",
 	"wonfun":		"Weon Seongjin",
