@@ -8,9 +8,14 @@ KNOWN_PLAYERS = {
 	# If both a logographic name and an ASCII name
 	# are known, I sometimes have both here...
 
+	"符合预期":		"As Expected",
 	"小香馋猫":		"Chang Hao",
 	"谜团":			"Chen Yaoye",
+	"돌바람":			"DolBaram",
 	"绝艺":			"Fine Art",
+	"绝艺指导A":		"Fine Art A",
+	"绝艺指导B":		"Fine Art B",
+	"绝艺指导C":		"Fine Art C",
 	"星宿老仙":		"Gu Li",
 	"印城之霸":		"Gu Zihao",
 	"风清扬":			"Hu Yaoyu",
@@ -35,6 +40,7 @@ KNOWN_PLAYERS = {
 	"black2012":	"Li Qincheng",
 	"doomsday":		"Mi Yuting",
 	"Eason":		"Zhou Ruiyang",
+	"fuheyuqi":		"As Expected",
 	"INDIANA13":	"Gu Zihao",
 	"jingjing":		"Dang Yifei",
 	"jpgo01":		"Iyama Yuta",
