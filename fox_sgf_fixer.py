@@ -9,6 +9,7 @@ KNOWN_PLAYERS = {
 	# are known, I sometimes have both here...
 
 	"符合预期":		"As Expected",
+	"金毛测试":		"BensonDarr",
 	"小香馋猫":		"Chang Hao",
 	"谜团":			"Chen Yaoye",
 	"돌바람":			"DolBaram",
@@ -38,6 +39,7 @@ KNOWN_PLAYERS = {
 	"Avenger007":	"Wang Yao",
 	"bibibig":		"Choi Cheolhan",
 	"black2012":	"Li Qincheng",
+	"clover77":		"Yun Junsang",
 	"doomsday":		"Mi Yuting",
 	"Eason":		"Zhou Ruiyang",
 	"fuheyuqi":		"As Expected",
@@ -94,7 +96,7 @@ def deal_with_file(filename):
 		black_real_name, white_real_name = None, None
 		regex_PB, regex_PW = None, None
 		try:
-			regex_PB, regex_PW = re.search(r"\[(.+)\]vs\[(.+)\]\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\.sgf", filename).group(1, 2)
+			regex_PB, regex_PW = re.search(r"\[(.+)\]vs\[(.+)\]\d+.sgf", filename).group(1, 2)
 		except:
 			pass
 
