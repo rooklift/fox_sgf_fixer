@@ -411,7 +411,7 @@ known_players_raw = {		# Keys get converted to lowercase later.
 	"龙门阵":                 "Gu Lingyi",
 }
 
-known_players = dict()		# Constructed later from the raw data above
+known_players = dict()		# Constructed later from the raw data above. Will be lowercase keys only.
 
 
 def deal_with_file(filename):
