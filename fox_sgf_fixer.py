@@ -2,7 +2,7 @@ import os, re, sys
 import gofish
 
 
-KNOWN_PLAYERS = {
+known_players_raw = {		# Keys get converted to lowercase later.
 
     # AIs
 
@@ -411,6 +411,8 @@ KNOWN_PLAYERS = {
 	"龙门阵":                 "Gu Lingyi",
 }
 
+known_players = dict()		# Constructed later from the raw data above
+
 
 def deal_with_file(filename):
 	try:
@@ -448,18 +450,18 @@ def deal_with_file(filename):
 		except:
 			pass
 
-		if regex_PB in KNOWN_PLAYERS:
-			black_real_name = KNOWN_PLAYERS[regex_PB]
+		if regex_PB and regex_PB.lower() in known_players:
+			black_real_name = known_players[regex_PB.lower()]
 			root.safe_commit("PB", "{} ({})".format(regex_PB, black_real_name))
-		elif PB in KNOWN_PLAYERS:
-			black_real_name = KNOWN_PLAYERS[PB]
+		elif PB and PB.lower() in known_players:
+			black_real_name = known_players[PB.lower()]
 			root.safe_commit("PB", "{} ({})".format(PB, black_real_name))
 
-		if regex_PW in KNOWN_PLAYERS:
-			white_real_name = KNOWN_PLAYERS[regex_PW]
+		if regex_PW and regex_PW.lower() in known_players:
+			white_real_name = known_players[regex_PW.lower()]
 			root.safe_commit("PW", "{} ({})".format(regex_PW, white_real_name))
-		elif PW in KNOWN_PLAYERS:
-			white_real_name = KNOWN_PLAYERS[PW]
+		elif PW and PW.lower() in known_players:
+			white_real_name = known_players[PW.lower()]
 			root.safe_commit("PW", "{} ({})".format(PW, white_real_name))
 
 		black_for_filename = black_real_name if black_real_name else regex_PB if regex_PB else PB if PB else "Unknown"
@@ -487,11 +489,21 @@ def deal_with_files(filenames):
 		deal_with_file(filename)
 
 
+def fix_known_players():
+	global known_players_raw
+	global known_players
+
+	for key in known_players_raw:
+		known_players[key.lower()] = known_players_raw[key]
+
+
 def main():
 
 	if len(sys.argv) == 1:
 		print("Need argument")
 		sys.exit()
+
+	fix_known_players()
 
 	for item in sys.argv[1:]:
 
