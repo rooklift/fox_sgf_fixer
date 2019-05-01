@@ -516,8 +516,8 @@ def main():
 		item = os.path.abspath(item)
 
 		if os.path.isdir(item):
-			all_things = list(map(lambda x : os.path.join(item, x), os.listdir(item)))
-			all_files = list(filter(lambda x : os.path.isfile(x), all_things))
+			all_things = [os.path.join(item, f) for f in os.listdir(item)]
+			all_files = [p for p in all_things if os.path.isfile(p)]
 			deal_with_files(all_files)
 		else:
 			deal_with_file(item)
