@@ -433,6 +433,12 @@ def deal_with_file(filename):
 		try:
 			if float(komi_string) >= 10 and "." not in komi_string:
 				new_string = komi_string[0] + "." + komi_string[1:]
+
+				if new_string == "3.25":		# Convert Chinese komi notation, if present.
+					new_string = "6.5"
+				if new_string == "3.75":
+					new_string = "7.5"
+
 				root.set_value("KM", new_string)
 		except:
 			pass
