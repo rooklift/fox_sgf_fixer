@@ -1,4 +1,4 @@
-import datetime, os, os.path
+import datetime, os, sys
 
 abspath = os.path.abspath(sys.argv[1])					# Likely unneeded, this will already be absolute
 dirname = os.path.dirname(abspath)
@@ -17,3 +17,4 @@ if basename.count("[") == 2 and basename.count("]") == 2:
 	new_basename = "{}-{:02}-{:02} {} vs {}.sgf".format(dt.year, dt.month, dt.day, pb, pw)
 
 	os.rename(abspath, os.path.join(dirname, new_basename))
+
