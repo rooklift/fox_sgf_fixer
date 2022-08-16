@@ -14,7 +14,7 @@ if basename.count("[") == 2 and basename.count("]") == 2:
 
 	dt = datetime.datetime.fromtimestamp(int(unixtime))
 
-	new_basename = "{}-{:02}-{:02} {} vs {}.sgf".format(dt.year, dt.month, dt.day, pb, pw)
+	new_basename = "{}-{:02}-{:02} ({:02}{:02}) {} vs {}.sgf".format(dt.year, dt.month, dt.day, dt.hour, dt.minute, pb, pw)
 
 	os.rename(abspath, os.path.join(dirname, new_basename))
 
